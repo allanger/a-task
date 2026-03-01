@@ -1,4 +1,4 @@
-#/usr/bin/bash 
+#/usr/bin/bash
 
 set -e
 
@@ -12,7 +12,7 @@ echo "INFO: Testing a first run"
 terraform apply -auto-approve
 PASSWORD_CURRENT_1=$(jq .test passwords.json)
 
-echo "INFO: Testing a run withouth changes"
+echo "INFO: Testing a run without changes"
 terraform apply -auto-approve
 PASSWORD_NEW_1=$(jq .test passwords.json)
 
@@ -32,7 +32,7 @@ if [[ "${PASSWORD_CURRENT_1}" = "${PASSWORD_NEW_2}" ]]; then
 fi
 PASSWORD_CURRENT_2="${PASSWORD_NEW_2}"
 
-echo "INFO: Testing a run withouth changes"
+echo "INFO: Testing a run without changes"
 export TF_VAR_active_password=2
 terraform apply -auto-approve
 PASSWORD_NEW_2=$(jq .test passwords.json)

@@ -1,13 +1,13 @@
-// This is supposed to be used fpr debugging.
-// For mutliple user management it would be more convinient
+// This is supposed to be used for debugging.
+// For multiple user management it would be more convenient
 // to define directly in locals in my opinion
 variable "active_password" {
   type    = number
   default = 1
 }
 
-// This is supposed to be used fpr debugging.
-// For mutliple user management it would be more convinient
+// This is supposed to be used for debugging.
+// For multiple user management it would be more convenient
 // to define directly in locals in my opinion
 variable "rotate" {
   type    = bool
@@ -31,7 +31,7 @@ locals {
 }
 
 data "local_file" "index_storage" {
-  // Only read the data if the file exists, otherwise it's 
+  // Only read the data if the file exists, otherwise it's
   // most probably the first run
   count    = fileexists(local.filename) ? 1 : 0
   filename = local.filename
@@ -44,7 +44,7 @@ module "passwords" {
   source          = "./module/"
   rotate          = try(each.value.rotate, false)
   active_password = try(each.value.active_password, 1)
-  // Passing the curently active password
+  // Passing the currently active password
   // to prevent swapping and rotating at the same time
   currently_active_password = fileexists(local.filename) ? jsondecode(data.local_file.index_storage[0].content)[each.key] : 0
 }
@@ -67,4 +67,3 @@ resource "local_file" "passwords_indexes" {
   })
   filename = "${path.module}/users.json"
 }
-
