@@ -1,5 +1,5 @@
 locals {
-  // Rotate can only happen if a password is not active
+  // Rotate can only happen if the password is not active
   force_rotate_1 = var.active_password == 2 && var.rotate
   force_rotate_2 = var.active_password == 1 && var.rotate
 }
@@ -9,7 +9,6 @@ resource "random_password" "password_1" {
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
   // Rotate only when current is not active and rotate is set to true
-
   keepers = {
     // If we want to rotate, set the keeper to a timestamp(), that would force rotation
     rotate = local.force_rotate_1 && var.rotate ? timestamp() : "placeholder"
@@ -28,7 +27,7 @@ resource "random_password" "password_2" {
   length           = 32
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
-
+  // Rotate only when current is not active and rotate is set to true
   keepers = {
     rotate = local.force_rotate_2 && var.rotate ? timestamp() : "placeholder"
   }
