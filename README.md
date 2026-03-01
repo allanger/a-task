@@ -2,11 +2,6 @@
 
 ## A couple of notes
 
-Password Generation: Generate two random passwords upon initial creation.
-Backup Password Rotation: Allow rotation (regeneration) of the backup password only.
-Password Swapping: Provide an option to swap the positions of the active and backup passwords, making the backup password the active one and vice versa.
-Idempotent: Subsequent runs don't regenerate any password unless we indicate that explicitly from outside.
-
 The module is not 100% idempotent, but it designed in a way that it shouldn't affect the state of the infrastructure.
 
 It's only possible to rotate the "backup" password as stated in the task, and the rotation is triggered by a variable that is passed to the module. If the value of that input is persisted to `true`, on each `terraform apply` the backup password will be regenerated.
