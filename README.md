@@ -10,7 +10,7 @@ But because of the **active/backup** logic, the active password is always set in
 
 In order to make the swapping and rotating impossible at the same run, the root module is sending the `currently_active_password` variable to the target module. If this file doesn't exist, the value is set to 0, and the validation is disabled.
 
-Password generator is checking if `currently_active_password` is the same as `active_password` (which in this case a desired active password), and if they are not equal, is not allowing `rotate` to be set to `true`
+Password generator is checking if `currently_active_password` is the same as `active_password` (which in this case is a desired active password), and if they are not equal, is not allowing `rotate` to be set to `true`
 
 ```hcl
   lifecycle {
